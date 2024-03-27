@@ -1,7 +1,14 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+"use client";
+
+import { Box, Container, Stack, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 const Navbar = () => {
+  const AuthButton = dynamic(
+    () => import("@/components/UI/AuthButton/AuthButton"),
+    { ssr: false }
+  );
   return (
     <Container>
       <Stack
@@ -14,29 +21,19 @@ const Navbar = () => {
           P
           <Box component="span" color="primary.main">
             H
-          </Box>{" "}
+          </Box>
           Health Care
         </Typography>
         <Stack direction="row" justifyContent="space-between" gap={4}>
           <Typography component={Link} href="/consultation">
             Consultation
           </Typography>
-          <Typography component={Link} href="/health-plans">
-            Health Plans
-          </Typography>
-          <Typography component={Link} href="/medicine">
-            Medicine
-          </Typography>
-          <Typography component={Link} href="/diagnostics">
-            Diagnostics
-          </Typography>
-          <Typography component={Link} href="/ngos">
-            NGOs
-          </Typography>
+          <Typography>Health Plans</Typography>
+          <Typography>Medicine</Typography>
+          <Typography>Diagnostics</Typography>
+          <Typography>NGOs</Typography>
         </Stack>
-        <Button component={Link} href="/login">
-          Login
-        </Button>
+        <AuthButton />
       </Stack>
     </Container>
   );
